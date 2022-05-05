@@ -1,22 +1,37 @@
-const express=require('express')
-const cors=require('cors')
-const dotenv=require('dotenv')
+require('dotenv').config()
+require('express-async-errors')
 
-const app =express()
-dotenv.config()
+const express = require('express')
+const app = express()
+
+const morgan = require('morgan')
+const cors = require('cors')
+
+const connectDB = require('./db/connect')
+const apiRoutes = require('./routes/apiRoutes')
+
+const notFoundMiddleware = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
 app.use(cors())
+app.use(morgan('tiny'))
 app.use(express.json())
 
-require('./db/connectDB')
-const apiRoutes=require('./routes/apiRoutes')
+app.use('/api/reservation', apiRoutes)
 
-app.use('/api',apiRoutes)
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
+const port = process.env.PORT || 8004
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URL)
+    app.listen(port, () => {
+      console.log(`Server is listening on port ${port}...`)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-
-const port=process.env.PORT || 5003
-
-app.listen(port,()=>{
-    console.log("Traveler Reservation Service port Started at:"+port);
-})
+start()

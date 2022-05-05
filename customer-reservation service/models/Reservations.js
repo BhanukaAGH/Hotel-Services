@@ -1,55 +1,48 @@
-const mongoose= require('mongoose')
-const Schema=mongoose.Schema
+const mongoose = require('mongoose')
 
-const reservationsSchema=new Schema({
-    RoomCount:{
-        type:Number,
-        required:true,
-        trim:true
+const ReservationSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
-    RoomType:{
-        type:String,
-        required:true,
-        trim:true
+    roomCount: {
+      type: Number,
+      required: true,
+      trim: true,
     },
-    HotelName:{
-        type:String,
-        required:true,
-        trim:true
+    roomType: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    PhoneNo:{
-        type:Number,
-        required:true,
-        trim:true
+    hotelName: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    Email:{
-        type:String,
-        required:true,
-        trim:true
+    phoneNo: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    CheckIn:{
-        type:String,
-        required:true,
-        trim:true
+    checkIn: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    CheckOut:{
-        type:String,
-        required:true,
-        trim:true
+    checkOut: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    UseName:{
-        type:String,
-        required:true,
-        trim:true
+    prepaid: {
+      type: Number,
+      trim: true,
     },
-    prepaid:{
-        type:Number,
-        trim:true
-    },
-    
+  },
+  { timestamps: true }
+)
 
-},{timestamps:true})
-
-const Reservations=mongoose.model('Reservations',reservationsSchema)
-
-module.exports=Reservations
+module.exports = mongoose.model('Reservation', ReservationSchema)
