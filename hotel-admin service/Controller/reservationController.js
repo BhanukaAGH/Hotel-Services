@@ -3,16 +3,10 @@ const AdminReservation = require('../Model/Reservation')
 exports.createReservation = async (req, res) => {
   try {
     const reversion = await AdminReservation.create(req.body)
-    res.statusCode(200).json({
-      status: 'success',
-      reversion,
-    })
+    res.status(200).json(reversion)
   } catch (error) {
     console.log(error)
-    res.json({
-      status: 'fail',
-      message: error,
-    })
+    res.status(409)
   }
 }
 
@@ -31,21 +25,21 @@ exports.getReservationDetails = async (req, res) => {
       message: error,
     })
   }
+  
 }
 
-exports.getOneReservation = async (req, res) => {
-  try {
-    const oneReservation = await AdminReservation.findById(req.params.id)
-    res.json({
-      status: 'success',
-      oneReservation,
-    })
-  } catch (error) {
-    res.json({
-      status: 'fail',
-      message: error,
-    })
+exports.getOneReservation = async (req, res) => {//get one admins hotels
+ try {
+  const reservations = await AdminReservation.find({ userId: req.params.userId })
+  if (!reservations) {
+    throw new CustomError.NotFoundError('No reservations')
   }
+
+  res.status(200).json({ reservations })
+ } catch (error) {
+   console.log(error);
+   res.status(500);
+ } 
 }
 
 exports.updateReservation = async (req, res) => {

@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const AdminReservationSchema = new Schema({
+  userId: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   hotelName: {
     type: String,
     unique: true,

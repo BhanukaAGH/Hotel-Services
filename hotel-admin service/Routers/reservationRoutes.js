@@ -10,7 +10,7 @@ const router = express.Router()
 
 router.route('/createReservationDetails').post(createReservation)
 router.route('/getReservationDetails').get(getReservationDetails)
-router.route('/getReservationDetail/:id').get(getOneReservation)
+router.route('/getReservationDetail/:userId').get(getOneReservation)
 router.route('/updateReservationDetail/:id').patch(updateReservation)
 router.route('/deleteOneReservation/:id').delete(deleteOneReservation)
 
