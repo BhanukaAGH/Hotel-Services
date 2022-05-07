@@ -1,5 +1,8 @@
 const Reservation = require('../models/Reservations')
 const { StatusCodes } = require('http-status-codes')
+const Moment = require('moment')
+const MomentRange = require('moment-range')
+const moment = MomentRange.extendMoment(Moment)
 const CustomError = require('../errors')
 
 //! Make Reservation
@@ -65,29 +68,27 @@ const checkAvailability = async (req, res) => {
   const { userId, checkIn, checkOut } = req.body
   const reservations = await Reservation.find({ userId })
 
-  let availability
-  let message
+  let availability = true
 
   for (let x in reservations) {
-    let checkInDate = new Date(reservations[x].checkIn)
-    let checkOutDate = new Date(reservations[x].checkOut)
-    let newcheckIn = new Date(checkIn)
-    let newcheckOut = new Date(checkOut)
+    var date1 = [
+      moment(reservations[x].checkIn),
+      moment(reservations[x].checkOut),
+    ]
+    var date2 = [moment(checkIn), moment(checkOut)]
 
-    if (
-      (checkInDate <= newcheckIn && checkOutDate >= newcheckIn) ||
-      (checkInDate <= newcheckOut && checkOutDate >= newcheckOut)
-    ) {
+    var range = moment.range(date1)
+    var range2 = moment.range(date2)
+
+    if (range.overlaps(range2)) {
       availability = false
-      message = 'date clashed'
       break
     } else {
       availability = true
-      message = 'not date clashed'
     }
   }
 
-  res.status(StatusCodes.OK).json({ availability, message })
+  res.status(StatusCodes.OK).json({ availability })
 }
 
 module.exports = {
