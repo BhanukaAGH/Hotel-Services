@@ -33,9 +33,12 @@ const AdminReservationSchema = new Schema({
     default: "Not Book",
     enum: ["Book", "Not Book"],
   },
-  url: {
+  longitude: {
     type: String,
   },
+  latitude: {
+    type: String,
+  }
 });
 
 module.exports = mongoose.model("AdminReservation", AdminReservationSchema);
