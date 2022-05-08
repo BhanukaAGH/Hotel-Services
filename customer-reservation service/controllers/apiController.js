@@ -7,13 +7,24 @@ const CustomError = require('../errors')
 
 //! Make Reservation
 const makeReservation = async (req, res) => {
-  const { userId, roomCount, roomType, hotelName, phoneNo, checkIn, checkOut } =
-    req.body
+  const {
+    userId,
+    name,
+    email,
+    roomCount,
+    roomType,
+    hotelName,
+    phoneNo,
+    checkIn,
+    checkOut,
+  } = req.body
 
   let { prepaid } = req.body
 
   if (
     !userId ||
+    !name ||
+    !email ||
     !roomCount ||
     !roomType ||
     !hotelName ||
@@ -27,6 +38,8 @@ const makeReservation = async (req, res) => {
   prepaid = prepaid * roomCount
   const reservation = await Reservation.create({
     userId,
+    name,
+    email,
     roomCount,
     roomType,
     hotelName,

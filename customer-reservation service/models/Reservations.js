@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 const ReservationSchema = new mongoose.Schema(
   {
@@ -6,6 +7,19 @@ const ReservationSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'User',
       required: true,
+    },
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      validate: {
+        validator: validator.isEmail,
+        message: 'Please provide valid email',
+      },
     },
     roomCount: {
       type: Number,

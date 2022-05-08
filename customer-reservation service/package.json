@@ -17,7 +17,8 @@
     "moment": "^2.29.3",
     "moment-range": "^4.0.2",
     "mongoose": "^6.3.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
