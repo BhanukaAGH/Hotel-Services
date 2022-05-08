@@ -6,11 +6,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN
 const client = require('twilio')(accountSid, authToken)
 
 const sendSMS = async (req, res) => {
-  const { countryCode, phoneNumber, message } = req.body
-
-  if (!countryCode) {
-    throw new BadRequestError('Please provide country code')
-  }
+  const { phoneNumber, message } = req.body
 
   if (!phoneNumber) {
     throw new BadRequestError('Please provide a phone number to send message')
@@ -24,7 +20,7 @@ const sendSMS = async (req, res) => {
     .create({
       body: message,
       messagingServiceSid: process.env.TWILIO_MESSAGING_SERVICE_SID,
-      to: countryCode + phoneNumber.replace(/^0+/, ''),
+      to: phoneNumber,
     })
     .then((message) => console.log(message.sid))
     .catch((err) => console.log(err))
