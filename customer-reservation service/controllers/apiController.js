@@ -79,6 +79,15 @@ const cancelreservations = async (req, res) => {
 //! Check Availability by user Id
 const checkAvailability = async (req, res) => {
   const { userId, checkIn, checkOut } = req.body
+
+  if (!checkIn) {
+    throw new CustomError.BadRequestError('Please enter check in date.')
+  }
+
+  if (!checkOut) {
+    throw new CustomError.BadRequestError('Please enter check out date.')
+  }
+
   const reservations = await Reservation.find({ userId })
 
   let availability = true
