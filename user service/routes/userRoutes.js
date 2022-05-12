@@ -12,12 +12,10 @@ const {
   updateUserPassword,
 } = require('../controllers/userController')
 
-router
-  .route('/')
-  .get(authenticateUser, authorizePermissions('system_admin'), getAllUsers)
+router.route('/').get(getAllUsers)
 
-router.route('/updateUser').patch(authenticateUser, updateUser)
-router.route('/updateUserPassword').patch(authenticateUser, updateUserPassword)
-router.route('/:id').get(authenticateUser, getSingleUser)
+router.route('/updateUser').patch(updateUser)
+router.route('/updateUserPassword').patch(updateUserPassword)
+router.route('/:id').get(getSingleUser)
 
 module.exports = router
