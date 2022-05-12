@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/hotel" name="adminAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" url-mapping="/create">
+        <inSequence>
+            <log>
+                <property name="message" value="welcome to hotel admin service"/>
+            </log>
+            <send>
+                <endpoint key="createHotel"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/getall">
+        <inSequence>
+            <log>
+                <property name="message" value="welcome to get all hotels details service"/>
+            </log>
+            <send>
+                <endpoint key="getAllHotels"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" uri-template="/{userId}">
+        <inSequence>
+            <log>
+                <property name="message" value="welcome to get admin specific hotel details"/>
+            </log>
+            <send>
+                <endpoint key="getSingleHotel"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="PATCH" uri-template="/{id}">
+        <inSequence>
+            <log>
+                <property name="message" value="welcome to update hotel details"/>
+            </log>
+            <send>
+                <endpoint key="updateHotel"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <log>
+                <property name="message" value="welcome to delete hotel"/>
+            </log>
+            <send>
+                <endpoint key="deleteHotel"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>

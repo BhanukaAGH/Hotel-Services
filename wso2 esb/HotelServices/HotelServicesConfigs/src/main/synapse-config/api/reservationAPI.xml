@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/reservation" name="reservationAPI" statistics="enable" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/{userId}">
+        <inSequence>
+            <log description="Request Log" level="custom">
+                <property name="message" value="get all reservations endpoint called."/>
+            </log>
+            <send>
+                <endpoint key="getAllReservation"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/">
+        <inSequence>
+            <log description="Request Log" level="custom">
+                <property name="message" value="make reservation endpoint called."/>
+            </log>
+            <send>
+                <endpoint key="makeReservation"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/check-availability">
+        <inSequence>
+            <log description="Request Log" level="custom">
+                <property name="message" value="check availability endpoint called."/>
+            </log>
+            <send>
+                <endpoint key="checkAvailability"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="DELETE" uri-template="/{reservationId}">
+        <inSequence>
+            <log description="Request Log" level="custom">
+                <property name="message" value="cancel reservation endpoint called."/>
+            </log>
+            <send>
+                <endpoint key="cancelReservation"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>
