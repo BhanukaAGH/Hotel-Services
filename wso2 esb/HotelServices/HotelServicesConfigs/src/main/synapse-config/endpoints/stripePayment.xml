@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="stripePayment" xmlns="http://ws.apache.org/ns/synapse">
-    <http method="post" uri-template="http://localhost:8001/create-payment-intent">
+    <http method="post" uri-template="https://stripepayment-hotelapi.herokuapp.com/create-payment-intent">
         <suspendOnFailure>
             <initialDuration>-1</initialDuration>
             <progressionFactor>1.0</progressionFactor>

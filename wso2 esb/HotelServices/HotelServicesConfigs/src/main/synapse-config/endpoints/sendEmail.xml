@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="sendEmail" xmlns="http://ws.apache.org/ns/synapse">
-    <http method="post" uri-template="http://localhost:8003/send-email">
+    <http method="post" uri-template="https://sendemail-hotelapi.herokuapp.com/send-email">
         <suspendOnFailure>
             <initialDuration>-1</initialDuration>
             <progressionFactor>1.0</progressionFactor>
