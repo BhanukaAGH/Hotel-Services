@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="sendSMS" xmlns="http://ws.apache.org/ns/synapse">
-    <http method="post" uri-template="https://sendsms-hotelapi.herokuapp.com/send-sms">
+    <http method="post" uri-template="http://localhost:8002/send-sms">
         <suspendOnFailure>
             <initialDuration>-1</initialDuration>
             <progressionFactor>1.0</progressionFactor>
