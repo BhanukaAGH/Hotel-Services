@@ -25,27 +25,29 @@ exports.getReservationDetails = async (req, res) => {
       message: error,
     })
   }
-  
 }
 
-exports.getOneReservation = async (req, res) => {//get one admins hotels
- try {
-  const reservations = await AdminReservation.find({ userId: req.params.userId })
-  if (!reservations) {
-    throw new CustomError.NotFoundError('No reservations')
-  }
+exports.getOneReservation = async (req, res) => {
+  //get one admins hotels
+  try {
+    const reservations = await AdminReservation.find({
+      userId: req.params.userId,
+    })
+    if (!reservations) {
+      throw new CustomError.NotFoundError('No reservations')
+    }
 
-  res.status(200).json({ reservations })
- } catch (error) {
-   console.log(error);
-   res.status(500);
- } 
+    res.status(200).json({ reservations })
+  } catch (error) {
+    console.log(error)
+    res.status(500)
+  }
 }
 
 exports.updateReservation = async (req, res) => {
   try {
     const oneReservation = await AdminReservation.findOneAndUpdate(
-      req.params.id,
+      { _id: req.params.id },
       req.body,
       {
         new: true,
@@ -67,7 +69,7 @@ exports.updateReservation = async (req, res) => {
 
 exports.deleteOneReservation = async (req, res) => {
   try {
-    await AdminReservation.findOneAndDelete(req.params.id)
+    await AdminReservation.findOneAndDelete({ _id: req.params.id })
     res.json({
       status: 'success',
     })
